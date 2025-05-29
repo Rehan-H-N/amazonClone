@@ -3,7 +3,7 @@ const express= require("express");
 
 const app= express();
 
-const port=8080;
+const port = process.env.port || 8080;
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
