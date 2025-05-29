@@ -78,5 +78,5 @@ connectDB();
     res.render("cart", { user: req.session.user || null, cart : cart });
   });
   
-  app.listen(8080, () => console.log('Server running on ${port}' ));
+  app.listen(8080, () => console.log(`Server running on ${port}` ));
   
