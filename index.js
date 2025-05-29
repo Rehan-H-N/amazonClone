@@ -2,7 +2,7 @@ require('dotenv').config();
 const express= require("express");
 
 const app= express();
-connectDB();
+
 const port=8080;
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -31,7 +31,7 @@ const connectDB = async () => {
     process.exit(1);
   }
 };
-
+connectDB();
 
   app.use(
     session({
