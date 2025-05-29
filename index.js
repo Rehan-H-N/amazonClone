@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express= require("express");
+const connectDB=require('./path/to/db');
 const app= express();
+connectDB();
 const port=8080;
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -18,17 +20,24 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname ,"views"));
 app.use(express.static(path.join(__dirname , "public")));
 
-mongoose.connect(process.env.MONGODB_URI,{
-  useNewUrlParser:true,
-  useUnifiedTopology:true
-}).then(()=>console.log("MongoDB connected"))
-.catch((err)=>console.log(err));
+const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/ecommerce", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-  
+const connectDB = async () => {
+  try {
+    const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/ecommerce";
+    await mongoose.connect(MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("MongoDB connected successfully");
+  } catch (error) {
+    console.error("MongoDB connection failed:", error);
+    process.exit(1);
+  }
+};
+
+module.exports = connectDB;
+
   app.use(
     session({
       secret: "secretKey",
