@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Amazon Clone</title>
+  <link rel="stylesheet" href="/styleHome.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">Amazon<span>.clone</span></div>
+    <input type="text" class="search-box" placeholder="Search for products" />
+    <div class="nav-links">
+      <!-- <a href="/login">Log In</a>
+      <a href="/signup">Sign Up</a> -->
+      <% if (user) { %>
+        <a href="#"><i class="fas fa-user-circle"></i> <%= user.username %></a>
+        <a href="/api/auth/logout">Logout</a>
+      <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/signup">Sign Up</a>
+      <% } %>
+      <a href="/cart" class="cart-link">
+        <i class="fas fa-shopping-cart"></i> Cart
+      </a>
+    
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <section class="banner">
+    <img src="/images/banner.jpg" alt="Amazon Banner" />
+  </section>
+
+  <!-- Products Section -->
+  <section class="products-container">
+    <% products.forEach(product => { %>
+      <div class="product-card">
+        <img src="<%= product.image %>" alt="<%= product.name %>" />
+        <h3><%= product.name %></h3>
+        <p>₹<%= product.price %></p>
+        <form action="/api/cart/add/<%= product._id %>" method="POST">
+          <button type="submit">Add to Cart</button>
+        </form>
+      </div>
+    <% }) %>
+  </section>
+
+  
+  
+</body>
+</html>

@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  
+  h1, h2 {
+    color: #333;
+  }
+  
+  form input, form button {
+    padding: 8px;
+    margin: 5px 0;
+    display: block;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  
