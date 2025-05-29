@@ -20,11 +20,9 @@ app.use(express.static(path.join(__dirname , "public")));
 
 const connectDB = async () => {
   try {
-    const MONGO_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/ecommerce";
-    await mongoose.connect(MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const MONGO_URI = process.env.MONGODB_URI ;
+    if (!MONGO_URI) throw new Error("MONGODB_URI is not defined in environment variables.");
+    await mongoose.connect(MONGO_URI);
     console.log("MongoDB connected successfully");
   } catch (error) {
     console.error("MongoDB connection failed:", error);
@@ -38,7 +36,8 @@ connectDB();
       secret: "secretKey",
       resave: false,
       saveUninitialized: false,
-      store: MongoStore.create({ mongoUrl: "mongodb://localhost:27017/ecommerce" }),
+      store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI,
+        collectionName: "sessions", }),
     })
   );
   
@@ -79,5 +78,5 @@ connectDB();
     res.render("cart", { user: req.session.user || null, cart : cart });
   });
   
-  app.listen(8080, () => console.log("Server running on port 8080"));
+  app.listen(8080, () => console.log('Server running on ${port}' ));
   
