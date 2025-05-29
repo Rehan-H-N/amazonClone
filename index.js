@@ -43,7 +43,7 @@ connectDB();
   
   // Routes
   const authRoutes = require("./routes/auth");
-  const productRoutes = require("./routes/product");
+  const productRoutes = require("./routes/products");
   const cartRoutes = require("./routes/cart");
   const adminRoutes = require("./routes/admin");
   const product = require("./models/product");
